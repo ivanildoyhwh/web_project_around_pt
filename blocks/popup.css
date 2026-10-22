@@ -157,3 +157,41 @@
     padding: 0;
   }
 }
+
+.popup__field {
+  position: relative;
+  display: block;
+}
+
+.popup__error {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: block;
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 15px;
+  opacity: 0;
+}
+
+.popup__error_visible {
+  opacity: 1;
+}
+
+.popup__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.popup__button_disabled {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  opacity: 0.2;
+  cursor: default;
+}
+
+.popup__button_disabled:hover {
+  background-color: #fff;
+  opacity: 0.2;
+  cursor: default;
+}
