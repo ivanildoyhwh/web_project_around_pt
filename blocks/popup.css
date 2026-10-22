@@ -65,6 +65,7 @@
 }
 
 .popup__input {
+  display: block;
   width: 100%;
   height: 47px;
   border: 0;
@@ -73,11 +74,12 @@
   line-height: 17px;
   box-sizing: border-box;
   padding: 10px 0 0;
-  margin-bottom: 10px;
+  margin: 0;
 }
 
-.popup__input:last-of-type {
-  margin-bottom: 0;
+/* No Figma o texto de exemplo tem 20% de opacidade */
+.popup__input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
 }
 
 .popup__title {
@@ -104,7 +106,8 @@
 
 .popup__image {
   max-width: 100%;
-  object-fit: cover;
+  max-height: 75vh;
+  object-fit: contain;
 }
 
 .popup__caption {
@@ -161,6 +164,11 @@
 .popup__field {
   position: relative;
   display: block;
+  margin-bottom: 10px;
+}
+
+.popup__field:last-of-type {
+  margin-bottom: 0;
 }
 
 .popup__error {
@@ -182,16 +190,16 @@
   border-bottom: 1px solid #ff0000;
 }
 
-.popup__button_disabled:hover {
-  background-color: #fff;
-  opacity: 0.2;
-  cursor: default;
-}
-
 .popup__button_disabled {
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
+  opacity: 0.2;
+  cursor: default;
+}
+
+.popup__button_disabled:hover {
+  background-color: #fff;
   opacity: 0.2;
   cursor: default;
 }

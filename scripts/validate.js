@@ -7,6 +7,12 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
+const errorMessages = {
+  valueMissing: "Preencha esse campo.",
+  typeMismatch: "Por favor, insira um endereço web.",
+  tooShort: "Aumente este texto para {minLength} caracteres ou mais.",
+};
+
 function getFormControls(formElement, config) {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector),
@@ -16,16 +22,41 @@ function getFormControls(formElement, config) {
   return { inputList, buttonElement };
 }
 
+function getErrorMessage(inputElement) {
+  const { validity } = inputElement;
+
+  if (validity.valueMissing) {
+    return errorMessages.valueMissing;
+  }
+
+  if (validity.typeMismatch) {
+    return errorMessages.typeMismatch;
+  }
+
+  if (validity.tooShort) {
+    return errorMessages.tooShort.replace(
+      "{minLength}",
+      inputElement.minLength,
+    );
+  }
+
+  return inputElement.validationMessage;
+}
+
+function getErrorElement(formElement, inputElement) {
+  return formElement.querySelector(`#${inputElement.id}-error`);
+}
+
 function showInputError(formElement, inputElement, config) {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  const errorElement = getErrorElement(formElement, inputElement);
 
   inputElement.classList.add(config.inputErrorClass);
-  errorElement.textContent = inputElement.validationMessage;
+  errorElement.textContent = getErrorMessage(inputElement);
   errorElement.classList.add(config.errorClass);
 }
 
 function hideInputError(formElement, inputElement, config) {
-  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  const errorElement = getErrorElement(formElement, inputElement);
 
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
